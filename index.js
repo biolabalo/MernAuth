@@ -6,7 +6,7 @@ const bcrypt = require("bcryptjs");
 
 const cors = require("cors");
 
-const User = require("./userModel");
+const User = require("./model/userModel");
 
 
 require('dotenv').config();
@@ -110,6 +110,20 @@ app.post("/userData", async (req, res) => {
         res.send({ status: "error", data: error });
       });
   } catch (error) {}
+});
+
+
+app.use(express.static(path.join(__dirname, "./frontend/build")));
+
+app.get("*", function (_, res) {
+  res.sendFile(
+    path.join(__dirname, "./frontend/build/index.html"),
+    function (err) {
+      if (err) {
+        res.status(500).send(err);
+      }
+    }
+  );
 });
 
 app.listen(5000, () => {
