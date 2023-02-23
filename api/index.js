@@ -1,15 +1,10 @@
-const express = require("express");
-
-const mongoose = require("mongoose");
-
-const bcrypt = require("bcryptjs");
-
-const cors = require("cors");
-
-const User = require("./model/userModel");
-
-
-require('dotenv').config();
+import express from "express";
+import mongoose from "mongoose";
+import bcrypt from "bcryptjs";
+import cors from "cors";
+import User from "./model/userModel";
+import dotenv from "dotenv";
+dotenv.config();
 
 
 const app = express();
