@@ -17,10 +17,6 @@ function App() {
           <Route path="/sign-in" element={<Login />} />
           <Route path="/sign-up" element={<SignUp />} />
 
-          <Route exact path="/" element={<PrivateRoute />}>
-            <Route exact path="/" element={<UserDetails />} />
-          </Route>
-
           <Route exact path="/userDetails" element={<PrivateRoute />}>
             <Route exact path="/userDetails" element={<UserDetails />} />
           </Route>
