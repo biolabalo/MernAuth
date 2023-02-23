@@ -2,15 +2,12 @@ import express from "express";
 import mongoose from "mongoose";
 import bcrypt from "bcryptjs";
 import cors from "cors";
-import User from "./model/userModel";
 import dotenv from "dotenv";
 dotenv.config();
-
 
 const app = express();
 app.use(express.json());
 app.use(cors());
-
 
 app.use(express.urlencoded({ extended: false }));
 
@@ -19,7 +16,7 @@ const jwt = require("jsonwebtoken");
 const JWT_SECRET =
   "hvdvay6ert72839289()aiyg8t87qt72393293883uhefiuh78ttq3ifi78272jbkj?[]]pou89ywe";
 
-const mongoUrl = process.env.DATABASE_URL
+const mongoUrl = process.env.DATABASE_URL;
 
 mongoose
   .connect(mongoUrl, {
@@ -30,13 +27,25 @@ mongoose
   })
   .catch((e) => console.log(e));
 
+const userDetailsScehma = new mongoose.Schema(
+  {
+    fname: String,
+    lname: String,
+    email: { type: String, unique: true },
+    password: String,
+  },
+  {
+    collection: "User",
+  }
+);
 
+const User = mongoose.model("User", userDetailsScehma);
 
-app.get('/api/', (req, res) => {
+app.get("/api/", (req, res) => {
   res.send({
-    message: 'hello world'
-  })
-})
+    message: "hello world",
+  });
+});
 
 app.post("/api/register", async (req, res) => {
   const { fname, lname, email, password, userType } = req.body;
@@ -106,7 +115,6 @@ app.post("/api/userData", async (req, res) => {
       });
   } catch (error) {}
 });
-
 
 app.listen(5000, () => {
   console.log("Server Started");
