@@ -15,7 +15,7 @@ export default function SignUp() {
   const onSubmit = (data) => {
     setSignUpError(false);
     setLoading(true);
-    fetch("http://localhost:5000/register", {
+    fetch("http://localhost:5000/api/register", {
       method: "POST",
       crossDomain: true,
       headers: {

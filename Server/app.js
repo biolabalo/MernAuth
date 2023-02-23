@@ -37,13 +37,13 @@ mongoose
 
 
 
-app.get('/', (req, res) => {
+app.get('/api/', (req, res) => {
   res.send({
     message: 'hello world'
   })
 })
 
-app.post("/register", async (req, res) => {
+app.post("/api/register", async (req, res) => {
   const { fname, lname, email, password, userType } = req.body;
 
   const encryptedPassword = await bcrypt.hash(password, 10);
@@ -66,7 +66,7 @@ app.post("/register", async (req, res) => {
   }
 });
 
-app.post("/login-user", async (req, res) => {
+app.post("/api/login-user", async (req, res) => {
   const { email, password } = req.body;
 
   const user = await User.findOne({ email });

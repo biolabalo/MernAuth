@@ -11,7 +11,7 @@ export default function Login() {
   const onSubmit = (data) => {
     setLoginError();
     setLoading(true);
-    fetch("http://localhost:5000/login-user", {
+    fetch("http://localhost:5000/api/login-user", {
       method: "POST",
       crossDomain: true,
       headers: {
