@@ -15,7 +15,7 @@ export default function SignUp() {
   const onSubmit = (data) => {
     setSignUpError(false);
     setLoading(true);
-    fetch("http://localhost:5000/api/register", {
+    fetch(`${process.env.REACT_APP_API_URL}/register`, {
       method: "POST",
       crossDomain: true,
       headers: {

@@ -4,7 +4,7 @@ export default function UserDetails() {
   const [userData, setUserData] = useState("");
  
   useEffect(() => {
-    fetch("http://localhost:5000/api/userData", {
+    fetch(`${process.env.REACT_APP_API_URL}/userData`, {
       method: "POST",
       crossDomain: true,
       headers: {

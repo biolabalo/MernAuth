@@ -4,8 +4,6 @@ const mongoose = require("mongoose");
 
 const bcrypt = require("bcryptjs");
 
-const path = require("path");
-
 const cors = require("cors");
 
 const User = require("./model/userModel");
@@ -89,7 +87,7 @@ app.post("/api/login-user", async (req, res) => {
   res.json({ status: "error", error: "Invalid Password" });
 });
 
-app.post("/userData", async (req, res) => {
+app.post("/api/userData", async (req, res) => {
   const { token } = req.body;
   try {
     const user = jwt.verify(token, JWT_SECRET, (err, res) => {
@@ -98,7 +96,7 @@ app.post("/userData", async (req, res) => {
       }
       return res;
     });
-    console.log(user);
+
     if (user == "token expired") {
       return res.send({ status: "error", data: "token expired" });
     }
@@ -115,19 +113,8 @@ app.post("/userData", async (req, res) => {
 });
 
 
-app.use(express.static(path.join(__dirname, "./frontend/build")));
-
-app.get("*", function (_, res) {
-  res.sendFile(
-    path.join(__dirname, "./frontend/build/index.html"),
-    function (err) {
-      if (err) {
-        res.status(500).send(err);
-      }
-    }
-  );
-});
-
 app.listen(5000, () => {
   console.log("Server Started");
 });
+
+module.exports = app;
