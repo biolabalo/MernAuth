@@ -11,6 +11,7 @@ export default function Login() {
   const onSubmit = (data) => {
     setLoginError();
     setLoading(true);
+    console.log(process.env.REACT_APP_API_URL, '.......')
     fetch(`${process.env.REACT_APP_API_URL}/login-user`, {
       method: "POST",
       crossDomain: true,
