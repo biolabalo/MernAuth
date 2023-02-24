@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+
 
 export default function SignUp() {
   const {
@@ -15,24 +17,20 @@ export default function SignUp() {
   const onSubmit = (data) => {
     setSignUpError(false);
     setLoading(true);
-    fetch(`${window.location.origin}/api/register`, {
-      method: "POST",
-      crossDomain: true,
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-        "Access-Control-Allow-Origin": "*",
-      },
-      body: JSON.stringify(data),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.error) {
+    axios
+      .post(`${window.location.origin}/api/register`, data, {
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+      })
+      .then((res) => {
+        if (res.data.error) {
           setLoading(false);
-          return setSignUpError(data.error);
+          return setSignUpError(res.data.error);
         }
 
-        if (data.status == "ok") {
+        if (res.data.status === "ok") {
           setLoading(false);
           navigate("/sign-in");
         } else {

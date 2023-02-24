@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 export default function Login() {
   const { register, handleSubmit } = useForm();
@@ -11,19 +12,19 @@ export default function Login() {
   const onSubmit = (data) => {
     setLoginError();
     setLoading(true);
-    fetch(`${window.location.origin}/api/login-user`, {
-      method: "POST",
-      crossDomain: true,
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-        "Access-Control-Allow-Origin": "*",
-      },
-      body: JSON.stringify(data),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.status == "ok") {
+
+    axios
+      .post(`${window.location.origin}/api/login-user`, data, {
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          "Access-Control-Allow-Origin": "*",
+        },
+      })
+      .then((response) => {
+        const data = response.data;
+
+        if (data.status === "ok") {
           setLoading(false);
           window.localStorage.setItem("token", data.data);
           window.localStorage.setItem("loggedIn", true);
