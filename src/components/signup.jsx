@@ -18,7 +18,7 @@ export default function SignUp() {
     setSignUpError(false);
     setLoading(true);
     axios
-      .post(`${window.location.origin}/api/register`, data, {
+      .post(` https://mern-auth-api.vercel.app/api/register`, data, {
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",

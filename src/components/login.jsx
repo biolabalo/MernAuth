@@ -12,9 +12,9 @@ export default function Login() {
   const onSubmit = (data) => {
     setLoginError();
     setLoading(true);
-
+    https://mern-auth-api.vercel.app/api
     axios
-      .post(`${window.location.origin}/api/login-user`, data, {
+      .post(`https://mern-auth-api.vercel.app/api/login-user`, data, {
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",

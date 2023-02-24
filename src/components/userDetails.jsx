@@ -4,7 +4,7 @@ export default function UserDetails() {
   const [userData, setUserData] = useState("");
  
   useEffect(() => {
-    fetch(`${window.location.origin}/api/userData`, {
+    fetch(` https://mern-auth-api.vercel.app/api/userData`, {
       method: "POST",
       crossDomain: true,
       headers: {
